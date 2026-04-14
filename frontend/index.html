@@ -1,0 +1,401 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>甯曢噾妫渿棰よ棰戝垎鏋愮湅鏉?/title>
+    <link rel="stylesheet" href="./styles.css" />
+  </head>
+  <body>
+    <div class="background-wash"></div>
+    <div class="background-grid"></div>
+    <main class="page-shell">
+      <header class="hero panel" data-reveal>
+        <div class="hero-copy">
+          <p class="eyebrow">Parkinson Tremor Observatory</p>
+          <h1>鎶婅棰戞帹鏂拰閲戞爣鍑嗗鐓э紝鏀捐繘鍚屼竴涓彲璇荤殑鍓嶇椤甸潰銆?/h1>
+          <p class="hero-text">
+            杩欎釜椤甸潰鐩存帴灞曠ず褰撳墠鎵瑰鐞嗕骇鐗╋紝瑕嗙洊绾棰戞帹鏂€乆sens 閲戞爣鍑嗗尮閰嶃€佷唬琛ㄦ€х梾渚嬪拰璺宠繃鍘熷洜銆?            涓嶄緷璧栧悗绔紝閫傚悎鏈湴婕旂ず銆佹眹鎶ュ拰蹇€熷鏍搞€?          </p>
+          <div class="hero-actions">
+            <a class="button button-primary" href="#lab">寮€濮嬭緭鍏ュ垎鏋?/a>
+            <a class="button button-secondary" href="#board">鏌ョ湅缁撴灉鐭╅樀</a>
+          </div>
+        </div>
+        <div class="hero-panel">
+          <div class="hero-stat">
+            <span>Latest Run</span>
+            <strong id="hero-run-date">2026-04-11</strong>
+          </div>
+          <div class="hero-stat hero-stat-accent">
+            <span>Gold-Guided Avg Accuracy</span>
+            <strong id="hero-accuracy">99.43%</strong>
+          </div>
+          <div class="hero-note">
+            褰撳墠璁捐鏂瑰悜锛氭殩鑹插疄楠屽璐ㄦ劅 + 娣辫壊鐩戞祴灞忓眰鍙狅紝瀵规瘮鈥滅畻娉曟帹鏂€濆拰鈥滀复搴婂鐓р€濅袱鏉¤矾寰勩€?          </div>
+        </div>
+      </header>
+
+      <section class="lab section" id="lab" data-reveal>
+        <div class="section-heading">
+          <p class="eyebrow">Interactive Lab</p>
+          <h2>涓婁紶瑙嗛鍜岄噾鏍囧噯锛岀洿鎺ラ€氳繃 HTTP 鍙戣捣鍒嗘瀽</h2>
+        </div>
+        <div class="lab-grid">
+          <form class="lab-form panel" id="analysis-form">
+            <div class="field-grid field-grid-double">
+              <label class="field">
+                <span>涓婁紶瑙嗛鏂囦欢</span>
+                <input id="video-file" name="videoFile" type="file" accept=".mp4,.mov,.avi,.mkv,.mpeg,.mpg,video/*" />
+              </label>
+              <label class="field">
+                <span>涓婁紶閲戞爣鍑嗘枃浠?/span>
+                <input id="gold-file" name="goldFile" type="file" accept=".mtb,.csv,.txt,.bin,.dat,application/octet-stream" />
+              </label>
+            </div>
+
+            <div class="field-grid field-grid-double">
+              <label class="field">
+                <span>鏈嶅姟鍣ㄨ棰戣矾寰勶紝鍙€?/span>
+                <input id="video-path" name="videoPath" type="text" placeholder="濡傛灉鏂囦欢宸茬粡鍦ㄦ湇鍔″櫒涓婏紝鍙洿鎺ュ～璺緞" />
+              </label>
+              <label class="field">
+                <span>鏈嶅姟鍣ㄩ噾鏍囧噯璺緞锛屽彲閫?/span>
+                <input id="gold-path" name="goldPath" type="text" placeholder="濡傛灉鏂囦欢宸茬粡鍦ㄦ湇鍔″櫒涓婏紝鍙洿鎺ュ～璺緞" />
+              </label>
+            </div>
+
+            <div class="field-grid field-grid-triple">
+              <label class="field">
+                <span>鍒嗘瀽妯″紡</span>
+                <select id="mode-select" name="mode">
+                  <option value="gold_guided">gold_guided</option>
+                  <option value="video_only">video_only</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>鎵嬩晶</span>
+                <select id="hand-select" name="hand">
+                  <option value="Right">Right</option>
+                  <option value="Left">Left</option>
+                </select>
+              </label>
+              <label class="field">
+                <span>杈撳嚭鐩綍</span>
+                <input id="output-dir" name="outputDir" type="text" placeholder="鐣欑┖鍒欒嚜鍔ㄧ敓鎴?results/ui_runs/run_鏃堕棿鎴? />
+              </label>
+            </div>
+
+            <div class="field-grid">
+              <label class="field">
+                <span>璁块棶浠ょ墝锛屽彲閫?/span>
+                <input id="access-token" name="accessToken" type="password" placeholder="濡傛灉鏈嶅姟绔紑鍚簡浠ょ墝淇濇姢锛屽湪杩欓噷濉啓 Bearer Token" />
+              </label>
+            </div>
+
+            <details class="advanced-panel">
+              <summary>楂樼骇鍙傛暟</summary>
+              <div class="field-grid field-grid-triple advanced-fields">
+                <label class="field">
+                  <span>trim_seconds</span>
+                  <input id="trim-seconds" name="trimSeconds" type="number" min="0" step="0.1" value="1.0" />
+                </label>
+                <label class="field">
+                  <span>frame_height</span>
+                  <input id="frame-height" name="frameHeight" type="number" min="0" step="1" value="600" />
+                </label>
+                <label class="field">
+                  <span>max_analysis_fps</span>
+                  <input id="max-analysis-fps" name="maxAnalysisFps" type="number" min="0" step="1" value="60" />
+                </label>
+              </div>
+              <div class="field-grid">
+                <label class="field">
+                  <span>model_complexity</span>
+                  <select id="model-complexity" name="modelComplexity">
+                    <option value="1">1</option>
+                    <option value="0">0</option>
+                  </select>
+                </label>
+              </div>
+            </details>
+
+            <div class="lab-actions">
+              <button class="button button-secondary" type="button" id="fill-gold-example">濉叆閲戞爣鍑嗙ず渚?/button>
+              <button class="button button-secondary" type="button" id="fill-video-example">濉叆绾棰戠ず渚?/button>
+              <button class="button button-primary" type="submit" id="run-analysis-button">寮€濮嬪垎鏋?/button>
+            </div>
+            <p class="lab-tip">
+              浜掕仈缃戞ā寮忎笅浼樺厛鐩存帴涓婁紶鏂囦欢锛涘鏋滈儴缃叉満鏈韩宸茬粡鏈夋暟鎹紝涔熷彲浠ュ～鏈嶅姟鍣ㄦ湰鍦拌矾寰勩€傞〉闈細閫氳繃 HTTP 璋冪敤 `ui_server.py`锛?              鐢卞悗绔繚瀛樹笂浼犳枃浠跺苟鎵ц Python 鍒嗘瀽銆?            </p>
+            <p class="lab-tip" id="server-mode-note">姝ｅ湪璇诲彇鏈嶅姟鍣ㄩ厤缃€?/p>
+          </form>
+
+          <aside class="lab-console panel">
+            <div class="console-header">
+              <div>
+                <p class="eyebrow">Runner</p>
+                <h3>鏈湴鍒嗘瀽鎺у埗鍙?/h3>
+              </div>
+              <span class="status-chip idle" id="job-status-chip">Idle</span>
+            </div>
+
+            <div class="console-metrics">
+              <div class="console-metric">
+                <span>杈撳嚭鐩綍</span>
+                <strong id="job-output-dir">鏈紑濮?/strong>
+              </div>
+              <div class="console-metric">
+                <span>鍛戒护鐘舵€?/span>
+                <strong id="job-return-code">绛夊緟鎻愪氦</strong>
+              </div>
+            </div>
+
+            <div class="command-preview">
+              <span>鍛戒护棰勮</span>
+              <code id="job-command-preview">python parkinson_detection.py ...</code>
+            </div>
+
+            <div class="preview-shell" id="result-preview-shell" hidden>
+              <div class="preview-copy">
+                <span>缁撴灉鍥鹃瑙?/span>
+                <a id="result-image-link" href="#" target="_blank" rel="noreferrer">鍗曠嫭鎵撳紑</a>
+              </div>
+              <img id="result-image" alt="鍒嗘瀽缁撴灉鍥鹃瑙? />
+            </div>
+
+            <div class="log-shell">
+              <div class="preview-copy">
+                <span>杩愯鏃ュ織</span>
+                <button type="button" class="inline-button" id="clear-log-button">娓呯┖鏄剧ず</button>
+              </div>
+              <pre id="job-log">绛夊緟浠诲姟銆傚厛杩愯 `python ui_server.py`锛屽啀鍦ㄨ繖涓〉闈㈤噷鎻愪氦鍒嗘瀽銆?/pre>
+            </div>
+          </aside>
+        </div>
+      </section>
+
+      <section class="summary-strip" data-reveal>
+        <article class="metric-card">
+          <span class="metric-label">绾棰戦娴?/span>
+          <strong id="metric-video-count">49</strong>
+          <small>鍗曟ā鎬佸叏閲忓垎鏋愭牱鏈?/small>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">閲戞爣鍑嗗尮閰?/span>
+          <strong id="metric-gold-count">41</strong>
+          <small>Xsens 鎴愬姛閰嶅鐥呬緥</small>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">骞冲潎棰戠巼璇樊</span>
+          <strong id="metric-error">0.020 Hz</strong>
+          <small>瑙嗛宄板€间笌閲戞爣鍑嗗嘲鍊煎樊</small>
+        </article>
+        <article class="metric-card">
+          <span class="metric-label">璺宠繃鏉＄洰</span>
+          <strong id="metric-skipped">8</strong>
+          <small>缂哄皯瀵瑰簲 Xsens 浼氳瘽</small>
+        </article>
+      </section>
+
+      <section class="methods section" id="methods" data-reveal>
+        <div class="section-heading">
+          <p class="eyebrow">Two Tracks</p>
+          <h2>鍙岃矾寰勭湅鎳傛ā鍨嬭涓?/h2>
+        </div>
+        <div class="method-grid">
+          <article class="method-card method-card-video">
+            <div class="method-header">
+              <h3>绾棰?Video-Only</h3>
+              <span class="method-badge">Inference</span>
+            </div>
+            <p>
+              鍙緷璧栨墜閮ㄥ叧閿偣鏃跺簭淇″彿锛屼粠澶氫釜鍊欓€夌壒寰佷腑閫夋嫨鏈€绋冲畾鐨勯渿棰ゅ嘲鍊硷紝鐢ㄤ簬鏃犻噾鏍囧噯鍦烘櫙鐨勫揩閫熺瓫鏌ャ€?            </p>
+            <div class="method-kpis">
+              <div>
+                <span>骞冲潎缃俊搴?/span>
+                <strong id="video-confidence">0.637</strong>
+              </div>
+              <div>
+                <span>骞冲潎宄板€奸鐜?/span>
+                <strong id="video-peak">3.486 Hz</strong>
+              </div>
+              <div>
+                <span>宸﹀彸鎵嬪垎甯?/span>
+                <strong id="video-hands">24 / 25</strong>
+              </div>
+            </div>
+            <div class="feature-cluster">
+              <span>涓诲鐗瑰緛</span>
+              <div class="pill-row" id="video-feature-pills"></div>
+            </div>
+          </article>
+
+          <article class="method-card method-card-gold">
+            <div class="method-header">
+              <h3>閲戞爣鍑?Gold-Guided</h3>
+              <span class="method-badge">Calibration</span>
+            </div>
+            <p>
+              灏嗚棰戝垎鏋愮粨鏋滀笌 Xsens MTw 淇″彿閰嶅锛屼互棰戠巼璇樊銆佽氨鐩镐技搴﹀拰鍊欓€夊垎鏁板叡鍚屽喅瀹氭渶缁堝尮閰嶏紝鐢ㄤ簬楠岃瘉涓庡鏍搞€?            </p>
+            <div class="method-kpis">
+              <div>
+                <span>骞冲潎鍑嗙‘鐜?/span>
+                <strong id="gold-accuracy">99.434%</strong>
+              </div>
+              <div>
+                <span>骞冲潎璋辩浉浼煎害</span>
+                <strong id="gold-similarity">0.815</strong>
+              </div>
+              <div>
+                <span>鏈€浣?/ 鏈€浣?/span>
+                <strong id="gold-range">99.996% / 96.593%</strong>
+              </div>
+            </div>
+            <div class="feature-cluster">
+              <span>涓诲鐗瑰緛</span>
+              <div class="pill-row" id="gold-feature-pills"></div>
+            </div>
+          </article>
+        </div>
+      </section>
+
+      <section class="pipeline section" data-reveal>
+        <div class="section-heading">
+          <p class="eyebrow">Pipeline</p>
+          <h2>浠庤棰戝埌澶嶆牳鍥剧殑鍥涙璺緞</h2>
+        </div>
+        <div class="pipeline-grid">
+          <article class="pipeline-step">
+            <span class="step-index">01</span>
+            <h3>鎵嬮儴璺熻釜</h3>
+            <p>MediaPipe 鎻愬彇鎵嬮儴鍏抽敭鐐癸紝鎸夊乏鎵?/ 鍙虫墜淇濇寔鐩爣璺熻釜銆?/p>
+          </article>
+          <article class="pipeline-step">
+            <span class="step-index">02</span>
+            <h3>棰戝煙浼拌</h3>
+            <p>瀵瑰涓建杩圭壒寰佸仛 PSD 鍒嗘瀽锛屾悳绱㈡渶绋冲畾鐨勯渿棰や富宄般€?/p>
+          </article>
+          <article class="pipeline-step">
+            <span class="step-index">03</span>
+            <h3>閲戞爣鍑嗛厤瀵?/h3>
+            <p>鑻ュ瓨鍦?Xsens 浼氳瘽锛屽垯鎶婅棰戝嘲鍊间笌 MTB 宄板€煎仛鍊欓€夌煩闃靛尮閰嶃€?/p>
+          </article>
+          <article class="pipeline-step">
+            <span class="step-index">04</span>
+            <h3>缁撴灉钀界洏</h3>
+            <p>杈撳嚭 CSV銆侀厤瀵瑰浘鍜屾壒澶勭悊鏃ュ織锛岀敤浜庢姤鍛娿€佸闃呭拰涓嬩竴杞皟鍙傘€?/p>
+          </article>
+        </div>
+      </section>
+
+      <section class="scoreboard section" data-reveal>
+        <div class="score-card panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Agreement</p>
+            <h2>鏁翠綋涓€鑷存€?/h2>
+          </div>
+          <div class="ring-grid">
+            <div class="ring-card">
+              <div class="ring" id="accuracy-ring">
+                <span id="accuracy-ring-value">99.43%</span>
+              </div>
+              <p>骞冲潎鍑嗙‘鐜?/p>
+            </div>
+            <div class="ring-card">
+              <div class="ring ring-secondary" id="similarity-ring">
+                <span id="similarity-ring-value">0.815</span>
+              </div>
+              <p>骞冲潎璋辩浉浼煎害</p>
+            </div>
+          </div>
+        </div>
+        <aside class="score-aside panel">
+          <div class="section-heading compact">
+            <p class="eyebrow">Coverage</p>
+            <h2>缂哄け涓庤鐩?/h2>
+          </div>
+          <div class="coverage-copy">
+            <p>
+              `video_only` 瑕嗙洊浜嗗叏閮?49 鏉¤棰戣褰曪紱`gold_guided` 鐢变簬涓ょ粍鏃堕棿鐐规病鏈?              Xsens 浼氳瘽锛屾渶缁堣烦杩?8 鏉°€?            </p>
+            <div class="skip-cluster" id="skip-group-pills"></div>
+          </div>
+        </aside>
+      </section>
+
+      <section class="highlights section" id="highlights" data-reveal>
+        <div class="section-heading">
+          <p class="eyebrow">Highlights</p>
+          <h2>涓変釜瑙掑害鐪嬩唬琛ㄦ€х梾渚?/h2>
+        </div>
+        <div class="highlight-block">
+          <div class="highlight-title">
+            <h3>楂樼疆淇″害鐨勭函瑙嗛妗堜緥</h3>
+            <p>浼樺厛灞曠ず鍗曟ā鎬佹帹鏂渶绋冲畾鐨勪竴缁勬牱鏈€?/p>
+          </div>
+          <div class="highlight-grid" id="video-highlight-grid"></div>
+        </div>
+        <div class="highlight-block">
+          <div class="highlight-title">
+            <h3>涓庨噾鏍囧噯鏈€鎺ヨ繎鐨勯厤瀵?/h3>
+            <p>杩欎簺鐥呬緥鐨勮棰戜富宄板嚑涔庤创鍚?Xsens 宄板€笺€?/p>
+          </div>
+          <div class="highlight-grid" id="gold-best-grid"></div>
+        </div>
+        <div class="highlight-block">
+          <div class="highlight-title">
+            <h3>寤鸿澶嶆牳鐨勮竟缂樻牱鏈?/h3>
+            <p>鍑嗙‘鐜囩浉瀵硅緝浣庯紝涓嶄竴瀹氶敊锛屼絾鏇撮€傚悎浜哄伐澶嶆煡銆?/p>
+          </div>
+          <div class="highlight-grid" id="gold-watch-grid"></div>
+        </div>
+      </section>
+
+      <section class="board section" id="board" data-reveal>
+        <div class="section-heading">
+          <p class="eyebrow">Result Matrix</p>
+          <h2>鎵瑰鐞嗙粨鏋滅煩闃?/h2>
+        </div>
+
+        <div class="board-toolbar panel">
+          <div class="control-group">
+            <span class="control-label">鏁版嵁闆?/span>
+            <div class="segmented" id="dataset-switch">
+              <button class="is-active" data-dataset="gold">Gold-Guided</button>
+              <button data-dataset="video">Video-Only</button>
+              <button data-dataset="skipped">Skipped</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <span class="control-label">鎵嬩晶</span>
+            <div class="segmented" id="hand-switch">
+              <button class="is-active" data-hand="all">鍏ㄩ儴</button>
+              <button data-hand="Left">宸︽墜</button>
+              <button data-hand="Right">鍙虫墜</button>
+            </div>
+          </div>
+          <label class="search-box">
+            <span class="control-label">鎼滅储鐥呬緥 / 鏃堕棿缁?/span>
+            <input id="search-input" type="search" placeholder="渚嬪 P021 鎴?2025_8_14" />
+          </label>
+        </div>
+
+        <div class="table-shell panel">
+          <div class="table-meta">
+            <strong id="table-title">Gold-Guided Results</strong>
+            <span id="table-count">41 rows</span>
+          </div>
+          <div class="table-wrap">
+            <table>
+              <thead id="table-head"></thead>
+              <tbody id="table-body"></tbody>
+            </table>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <script>window.__APP_MODE__ = "static";</script>
+    <script src="./data.js"></script>
+    <script src="./app.js"></script>
+  </body>
+</html>
+

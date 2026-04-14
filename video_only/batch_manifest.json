@@ -1,0 +1,11 @@
+{
+  "created_at_epoch": 1775836654.8772051,
+  "analysis_mode": "video_only",
+  "video_root": "F:\\parkinson detection\\视频",
+  "video_group_count": 10,
+  "video_count": 49,
+  "frame_height": 900,
+  "model_complexity": 1,
+  "max_analysis_fps": 60.0,
+  "trim_seconds": 1.0
+}
